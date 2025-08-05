@@ -1,0 +1,26 @@
+{
+  "name": "charcoal-dev/base",
+  "description": "Foundational traits, base classes, enums, and event tools for Charcoal and related PHP libraries",
+  "type": "library",
+  "homepage": "https://github.com/charcoal-dev/base",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Furqan A. Siddiqui",
+      "email": "hello@furqansiddiqui.com",
+      "homepage": "https://www.furqansiddiqui.com",
+      "role": "Author"
+    }
+  ],
+  "require": {
+    "php": "^8.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Charcoal\\Base\\": [
+        "src"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}
