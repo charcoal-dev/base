@@ -165,6 +165,7 @@ class ClassSingletonTest extends TestCase
 
     /**
      * Test that the "instances" property is private and not visible in child classes.
+     * @throws \ReflectionException
      */
     public function testInstancesPropertyScopeAndInheritance(): void
     {
@@ -210,7 +211,7 @@ class ClassSingletonTest extends TestCase
                 continue;
             }
 
-            // All subsequent iterations should match the first
+            // All later iterations should match the first
             $this->assertSame($first, $inst, "Iteration $i should yield the same instance.");
             $this->assertSame($firstId, spl_object_id($inst), "Iteration $i should match the first object's ID.");
         }
