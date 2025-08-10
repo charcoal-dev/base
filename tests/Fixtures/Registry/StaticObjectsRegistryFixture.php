@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Fixtures\Registry;
 
-use Charcoal\Base\Registry\StaticObjectsRegistryTrait;
+use Charcoal\Base\Concerns\StaticObjectsRegistry;
 
 class StaticObjectsRegistryFixture
 {
-    use StaticObjectsRegistryTrait;
+    use StaticObjectsRegistry;
 
     public static function getObject(string $key): ?object
     {

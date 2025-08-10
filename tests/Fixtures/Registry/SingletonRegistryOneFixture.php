@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Fixtures\Registry;
 
-use Charcoal\Base\Registry\AbstractClassSingleton;
+use Charcoal\Base\Support\SharedStaticInstances;
 
-class SingletonRegistryOneFixture extends AbstractClassSingleton
+class SingletonRegistryOneFixture extends SharedStaticInstances
 {
     public static function getInstance(): static
     {

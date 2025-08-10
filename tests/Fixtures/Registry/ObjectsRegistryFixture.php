@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Fixtures\Registry;
 
-use Charcoal\Base\Registry\ObjectsRegistryTrait;
+use Shelved\Registry\InstancedObjectsRegistry;
 
 class ObjectsRegistryFixture
 {
-    use ObjectsRegistryTrait;
+    use InstancedObjectsRegistry;
 
     public function getObject(string $key): ?object
     {

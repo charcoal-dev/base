@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Registry;
 
-use Charcoal\Base\Registry\AbstractClassSingleton;
+use Charcoal\Base\Support\SharedStaticInstances;
 use Charcoal\Base\Tests\Fixtures\Registry\SingletonChildOneFixture;
 use Charcoal\Base\Tests\Fixtures\Registry\SingletonChildThreeFixture;
 use Charcoal\Base\Tests\Fixtures\Registry\SingletonChildTwoFixture;
@@ -169,7 +169,7 @@ class ClassSingletonTest extends TestCase
      */
     public function testInstancesPropertyScopeAndInheritance(): void
     {
-        $abstract = AbstractClassSingleton::class;
+        $abstract = SharedStaticInstances::class;
         $child = SingletonRegistryOneFixture::class;
 
         // Check child is a subclass of abstract singleton
