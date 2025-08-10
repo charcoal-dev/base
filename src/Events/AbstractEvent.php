@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Charcoal\Base\Events;
 
 use Charcoal\Base\Enums\ExceptionAction;
+use Charcoal\Base\Events\Exception\EventListenerErrorException;
 use Charcoal\Base\Traits\ControlledSerializableTrait;
 
 /**

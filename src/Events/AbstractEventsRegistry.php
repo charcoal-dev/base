@@ -10,6 +10,7 @@ namespace Charcoal\Base\Events;
 
 use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
 use Charcoal\Base\Enums\ExceptionAction;
+use Charcoal\Base\Events\Exception\EventListenerErrorException;
 use Charcoal\Base\Traits\ControlledSerializableTrait;
 
 /**

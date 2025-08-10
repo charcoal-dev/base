@@ -1,4 +1,9 @@
 <?php
+/**
+ * Part of the "charcoal-dev/base" package.
+ * @link https://github.com/charcoal-dev/base
+ */
+
 declare(strict_types=1);
 
 /**
@@ -6,8 +11,9 @@ declare(strict_types=1);
  * @link https://github.com/charcoal-dev/base
  */
 
-namespace Charcoal\Base\Events;
+namespace Charcoal\Base\Events\Exception;
 
+use Charcoal\Base\Events\AbstractEvent;
 use Charcoal\Base\Exceptions\WrappedException;
 
 /**
