@@ -5,7 +5,7 @@ namespace Charcoal\Base\Tests;
 
 use Charcoal\Base\Enums\ExceptionAction;
 use Charcoal\Base\Events\AbstractEvent;
-use Charcoal\Base\Events\EventListenerErrorException;
+use Charcoal\Base\Events\Exception\EventListenerErrorException;
 use Charcoal\Base\Tests\Fixtures\Events\EventBookOne;
 use Charcoal\Base\Tests\Fixtures\Events\EventBookTyped;
 use PHPUnit\Framework\TestCase;
@@ -149,7 +149,7 @@ class EventsTest extends TestCase
         for ($i = 0; $i < $count; $i++) {
             $event->listen(function () use ($i) {
                 throw new \RuntimeException("Exception from listener " . ($i + 1));
-            });
+            }, uniqid("listener_" . $event->name . $i));
         }
 
         // Verify we attached the expected number of listeners.
@@ -302,7 +302,7 @@ class EventsTest extends TestCase
                 $event,
                 "Listener argument #3 should be an Event object"
             );
-        });
+        }, uniqid("event_" . $eventObject->name));
 
         // Trigger the event with the arguments to be verified by the above listener
         $eventObject->trigger(["Simple string match", 65535]);
