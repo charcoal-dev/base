@@ -81,7 +81,7 @@ class SharedStaticInstances
     /**
      * Constructor method made protected by default
      */
-    final protected function __construct()
+    protected function __construct()
     {
     }
 }
