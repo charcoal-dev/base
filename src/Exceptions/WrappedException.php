@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Exception;
+namespace Charcoal\Base\Exceptions;
 
 /**
  * A custom exception class that wraps another exception as its previous throwable.
