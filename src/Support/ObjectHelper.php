@@ -34,7 +34,7 @@ class ObjectHelper
     }
 
     /**
-     * @param object|string $class
+     * @param object|class-string $class
      * @return string
      */
     public static function baseClassName(object|string $class): string
@@ -43,4 +43,5 @@ class ObjectHelper
         $pos = strrpos($fqCn, "\\");
         return $pos === false ? $fqCn : substr($fqCn, $pos + 1);
     }
+
 }

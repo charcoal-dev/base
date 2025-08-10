@@ -13,18 +13,11 @@ namespace Charcoal\Base\Vectors;
  */
 class StringVector extends AbstractVector
 {
-    /**
-     * @param string[] $values
-     */
     public function __construct(string ...$values)
     {
         parent::__construct($values);
     }
 
-    /**
-     * @param string $value
-     * @return $this
-     */
     public function append(string $value): static
     {
         if ($value !== "") {
@@ -34,11 +27,9 @@ class StringVector extends AbstractVector
         return $this;
     }
 
-    /**
-     * @return static New vector instance with unique values
-     */
     public function filterUnique(): static
     {
-        return new static(...array_unique($this->values, SORT_STRING));
+        $this->values = array_values(array_unique($this->values, SORT_STRING));
+        return $this;
     }
 }
