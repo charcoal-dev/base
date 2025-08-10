@@ -1,10 +1,10 @@
 <?php
-declare(strict_types=1);
-
 /**
  * Part of the "charcoal-dev/base" package.
  * @link https://github.com/charcoal-dev/base
  */
+
+declare(strict_types=1);
 
 namespace Charcoal\Base\Traits;
 
@@ -17,8 +17,14 @@ trait ControlledSerializableTrait
 {
     use BlockLegacySerializationTrait;
 
+    /**
+     * @return array
+     */
     abstract protected function collectSerializableData(): array;
 
+    /**
+     * @return array
+     */
     final public function __serialize(): array
     {
         return $this->collectSerializableData();
