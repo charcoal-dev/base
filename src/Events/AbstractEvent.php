@@ -14,7 +14,7 @@ use Charcoal\Base\Traits\ControlledSerializableTrait;
 /**
  * Represents an event that allows attaching and managing listeners.
  */
-class BaseEvent
+class AbstractEvent
 {
     private array $listeners = [];
 

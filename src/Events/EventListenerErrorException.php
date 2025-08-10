@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Events;
 
-use Charcoal\Base\Exception\WrappedException;
+use Charcoal\Base\Exceptions\WrappedException;
 
 /**
  * EventListenerErrorException
@@ -17,10 +17,10 @@ use Charcoal\Base\Exception\WrappedException;
 class EventListenerErrorException extends WrappedException
 {
     public function __construct(
-        \Throwable                $previous,
-        public readonly BaseEvent $event,
-        public readonly string    $listenerId,
-        public readonly array     $args,
+        \Throwable                    $previous,
+        public readonly AbstractEvent $event,
+        public readonly string        $listenerId,
+        public readonly array         $args,
     )
     {
         parent::__construct($previous);

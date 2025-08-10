@@ -1,19 +1,19 @@
 <?php
-declare(strict_types=1);
-
 /**
  * Part of the "charcoal-dev/base" package.
  * @link https://github.com/charcoal-dev/base
  */
 
-namespace Charcoal\Base\Registry;
+declare(strict_types=1);
+
+namespace Charcoal\Base\Concerns;
 
 /**
  * This trait provides a mechanism for storing and accessing objects
  * in a centralized static registry. It supports adding, retrieving,
  * checking existence, removing, and normalizing instance keys in the registry.
  */
-trait StaticObjectsRegistryTrait
+trait StaticObjectsRegistry
 {
     private static array $instances = [];
 

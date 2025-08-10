@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Events;
 
+use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
 use Charcoal\Base\Enums\ExceptionAction;
-use Charcoal\Base\Registry\ObjectsRegistryTrait;
 use Charcoal\Base\Traits\ControlledSerializableTrait;
 
 /**
@@ -20,48 +20,49 @@ use Charcoal\Base\Traits\ControlledSerializableTrait;
 abstract class AbstractEventsRegistry
 {
     public ExceptionAction $onListenerError = ExceptionAction::Throw;
+    private array $events = [];
 
-    use ObjectsRegistryTrait;
+    use RequiresNormalizedRegistryKeys;
     use ControlledSerializableTrait;
 
     /**
-     * @param BaseEvent|string $event
-     * @return BaseEvent
+     * @param AbstractEvent|string $event
+     * @return AbstractEvent
      */
-    protected function getEvent(BaseEvent|string $event): BaseEvent
+    protected function getEvent(AbstractEvent|string $event): AbstractEvent
     {
-        $name = $event instanceof BaseEvent ?
+        $name = $event instanceof AbstractEvent ?
             $event->name : $this->normalizeRegistryKey($event);
 
-        if (isset($this->instances[$name])) {
-            return $this->instances[$name];
+        if (isset($this->events[$name])) {
+            return $this->events[$name];
         }
 
-        return $this->instances[$name] = new BaseEvent($this, $name);
+        return $this->events[$name] = new AbstractEvent($this, $name);
     }
 
     /**
-     * @param BaseEvent|string $event
+     * @param AbstractEvent|string $event
      * @return bool
      */
-    public function hasEvent(BaseEvent|string $event): bool
+    public function hasEvent(AbstractEvent|string $event): bool
     {
-        $name = $event instanceof BaseEvent ?
+        $name = $event instanceof AbstractEvent ?
             $event->name : $this->normalizeRegistryKey($event);
 
-        return isset($this->instances[$name]);
+        return isset($this->events[$name]);
     }
 
     /**
-     * @param BaseEvent|string $event
+     * @param AbstractEvent|string $event
      * @return void
      */
-    protected function clearEvent(BaseEvent|string $event): void
+    protected function clearEvent(AbstractEvent|string $event): void
     {
-        $name = $event instanceof BaseEvent ?
+        $name = $event instanceof AbstractEvent ?
             $event->name : $this->normalizeRegistryKey($event);
 
-        unset($this->instances[$name]);
+        unset($this->events[$name]);
     }
 
     /**
@@ -69,7 +70,7 @@ abstract class AbstractEventsRegistry
      */
     public function getCount(): int
     {
-        return count($this->instances);
+        return count($this->events);
     }
 
     /**
@@ -77,7 +78,7 @@ abstract class AbstractEventsRegistry
      */
     protected function collectSerializableData(): array
     {
-        return ["events" => $this->instances,
+        return ["events" => $this->events,
             "onListenerError" => $this->onListenerError];
     }
 
@@ -87,7 +88,7 @@ abstract class AbstractEventsRegistry
      */
     public function __unserialize(array $data): void
     {
-        $this->instances = $data["events"];
+        $this->events = $data["events"];
         $this->onListenerError = $data["onListenerError"];
     }
 
