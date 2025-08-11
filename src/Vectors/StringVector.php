@@ -15,13 +15,17 @@ class StringVector extends AbstractVector
 {
     public function __construct(string ...$values)
     {
-        parent::__construct($values);
+        parent::__construct();
+        $this->append(...$values);
     }
 
-    public function append(string $value): static
+    public function append(string ...$values): static
     {
-        if ($value !== "") {
-            $this->values[] = $value;
+        foreach ($values as $value) {
+            $value = trim($value);
+            if ($value !== "") {
+                $this->values[] = $value;
+            }
         }
 
         return $this;
