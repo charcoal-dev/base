@@ -18,7 +18,7 @@ use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
  */
 abstract class AbstractFactoryRegistry
 {
-    private array $instances = [];
+    protected array $instances = [];
 
     use RequiresNormalizedRegistryKeys;
 
