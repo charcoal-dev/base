@@ -8,9 +8,12 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Vectors;
 
+use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
+
 /**
  * Provides functionality for managing a collection of enumeration values,
  * including optional enforcement of unique tokens only.
+ * @see StringVectorProviderInterface
  */
 abstract class AbstractEnumVector extends AbstractVector
 {
