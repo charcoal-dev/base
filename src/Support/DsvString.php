@@ -9,14 +9,24 @@ declare(strict_types=1);
 namespace Charcoal\Base\Support;
 
 use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Vectors\StringTokenVector;
+use Charcoal\Base\Vectors\AbstractTokenVector;
+use Charcoal\Base\Vectors\Traits\StringTokenVectorPublicApi;
 
 /**
  * Represents a delimited string vector, providing functionality to handle
  * delimited strings, manage case sensitivity, and respect character set constraints.
  */
-class DsvString extends StringTokenVector
+class DsvString extends AbstractTokenVector
 {
+    use StringTokenVectorPublicApi;
+
+    /**
+     * @param string|null $values
+     * @param string $delimiter
+     * @param Charset $charset
+     * @param bool $changeCase
+     * @param bool $uniqueTokensOnly
+     */
     public function __construct(
         ?string                 $values = null,
         public readonly string  $delimiter = ",",
@@ -35,16 +45,27 @@ class DsvString extends StringTokenVector
         $this->appendJoined((string)$values);
     }
 
-    public function toString(?string $glue = null): string
+    /**
+     * @return string
+     */
+    public function toString(): string
     {
-        return parent::toString($glue ?? $this->delimiter);
+        return $this->joinString($this->delimiter);
     }
 
+    /**
+     * @param string $values
+     * @return $this
+     */
     public function appendJoined(string $values): static
     {
         return $this->append(...explode($this->delimiter, $values));
     }
 
+    /**
+     * @param string $value
+     * @return string|null
+     */
     protected function normalizeStringValue(string $value): ?string
     {
         $normalized = parent::normalizeStringValue($value);
@@ -59,6 +80,10 @@ class DsvString extends StringTokenVector
         return $normalized;
     }
 
+    /**
+     * @param string $value
+     * @return string
+     */
     protected function toLowerCase(string $value): string
     {
         return $this->charset !== Charset::ASCII
