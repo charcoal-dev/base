@@ -19,7 +19,7 @@ class CaseStyleHelper
      */
     public static function pascalCaseFromRaw(string $input): string
     {
-        return ucfirst(implode("", static::splitStringOnNonWordChars($input)));
+        return implode("", static::splitStringOnNonWordChars($input));
     }
 
     /**
