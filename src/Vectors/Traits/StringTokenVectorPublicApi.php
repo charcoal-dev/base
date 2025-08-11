@@ -13,25 +13,16 @@ namespace Charcoal\Base\Vectors\Traits;
  */
 trait StringTokenVectorPublicApi
 {
-    /**
-     * @internal
-     */
     public function append(string ...$values): static
     {
         return $this->addTokens(...$values);
     }
 
-    /**
-     * @internal
-     */
     public function has(string $value): bool
     {
         return $this->hasToken($value);
     }
 
-    /**
-     * @internal
-     */
     public function delete(string $value): bool
     {
         return $this->deleteToken($value);
