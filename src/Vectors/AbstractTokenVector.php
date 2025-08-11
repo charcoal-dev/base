@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Vectors;
 
+use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
+
 /**
  * AbstractTokenVector is an abstract class that manages a collection of string tokens,
  * providing functionality to normalize, append, check, delete, and filter unique string tokens.
  * The behavior of token normalization and uniqueness is configurable through public properties.
  */
-class AbstractTokenVector extends AbstractVector
+class AbstractTokenVector extends AbstractVector implements StringVectorProviderInterface
 {
     public function __construct(
         public readonly bool $changeCase = true,
@@ -126,5 +128,15 @@ class AbstractTokenVector extends AbstractVector
     protected function toLowerCase(string $value): string
     {
         return strtolower($value);
+    }
+
+    public function toStringVector(): StringVector
+    {
+        return new StringVector(...$this->values);
+    }
+
+    public function toStringArray(): array
+    {
+        return $this->getArray();
     }
 }

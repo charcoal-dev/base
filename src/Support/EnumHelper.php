@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Support;
 
+use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
 use Charcoal\Base\Enums\ExceptionAction;
+use Charcoal\Base\Vectors\AbstractTokenVector;
 use Charcoal\Base\Vectors\StringVector;
 
 /**
@@ -51,18 +53,17 @@ class EnumHelper
 
     /**
      * @param class-string<\BackedEnum> $enumClass
-     * @param StringVector $values
+     * @param StringVector|StringVectorProviderInterface $values
      * @param ExceptionAction $onInvalid
      * @return string[]
      */
     public static function validateEnumValues(
-        string          $enumClass,
-        StringVector    $values,
-        ExceptionAction $onInvalid = ExceptionAction::Throw
+        string                                     $enumClass,
+        StringVector|StringVectorProviderInterface $values,
+        ExceptionAction                            $onInvalid = ExceptionAction::Throw
     ): array
     {
         static::validateStringBacked($enumClass);
-
         $values = $values->filterUnique()->getArray();
         $validated = [];
         foreach ($values as $value) {

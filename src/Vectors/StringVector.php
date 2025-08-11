@@ -13,12 +13,19 @@ namespace Charcoal\Base\Vectors;
  */
 class StringVector extends AbstractVector
 {
+    /**
+     * @param string ...$values
+     */
     public function __construct(string ...$values)
     {
         parent::__construct();
         $this->append(...$values);
     }
 
+    /**
+     * @param string ...$values
+     * @return $this
+     */
     public function append(string ...$values): static
     {
         foreach ($values as $value) {
@@ -31,6 +38,9 @@ class StringVector extends AbstractVector
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function filterUnique(): static
     {
         $this->values = array_values(array_unique($this->values, SORT_STRING));

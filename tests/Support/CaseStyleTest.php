@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Tests;
+namespace Charcoal\Base\Tests\Support;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 use Charcoal\Base\Support\CaseStyle;
 use Charcoal\Base\Support\CaseStyleHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 final class CaseStyleTest extends TestCase
 {
