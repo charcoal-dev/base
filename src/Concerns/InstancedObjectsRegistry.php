@@ -28,7 +28,7 @@ trait InstancedObjectsRegistry
      * @return void
      * @api
      */
-    final protected function registrySetInstance(string $key, object $instance): void
+    final protected function registrySet(string $key, object $instance): void
     {
         $this->instances[$this->normalizeRegistryKey($key)] = $instance;
     }
@@ -38,7 +38,7 @@ trait InstancedObjectsRegistry
      * @return T|null
      * @api
      */
-    final protected function registryGetInstance(string $key): ?object
+    final protected function registryGet(string $key): ?object
     {
         return $this->instances[$this->normalizeRegistryKey($key)] ?? null;
     }
@@ -48,7 +48,7 @@ trait InstancedObjectsRegistry
      * @return bool
      * @api
      */
-    final protected function registryHasInstance(string $key): bool
+    final protected function registryHas(string $key): bool
     {
         return array_key_exists($this->normalizeRegistryKey($key), $this->instances);
     }
@@ -58,7 +58,7 @@ trait InstancedObjectsRegistry
      * @return void
      * @api
      */
-    final protected function registryUnsetInstance(string $key): void
+    final protected function registryUnset(string $key): void
     {
         unset($this->instances[$this->normalizeRegistryKey($key)]);
     }
