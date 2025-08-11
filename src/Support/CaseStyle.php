@@ -21,6 +21,16 @@ enum CaseStyle
 
     /**
      * @param string $input
+     * @param CaseStyle $to
+     * @return string
+     */
+    public function to(string $input, CaseStyle $to): string
+    {
+        return $to->from($input, $this);
+    }
+
+    /**
+     * @param string $input
      * @param CaseStyle $from
      * @return string
      */
