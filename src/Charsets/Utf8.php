@@ -29,8 +29,11 @@ class Utf8
         UnicodeLanguageRangeInterface ...$languages
     ): bool
     {
-        return (bool)preg_match("/^[" . static::generateRegExp($allowSpaces, $asciiCharset,
-                ...$languages) . "]+$/u", $unsafeString);
+        $regExp = static::generateRegExp($allowSpaces, $asciiCharset, ...$languages);
+        if ($regExp === "") {
+            return false;
+        }
+        return preg_match("/^[" . $regExp . "]+$/u", $unsafeString) === 1;
     }
 
     /**
@@ -47,8 +50,8 @@ class Utf8
         UnicodeLanguageRangeInterface ...$languages
     ): string
     {
-        return preg_replace("/[^" . static::generateRegExp($allowSpaces, $asciiCharset,
-                ...$languages) . "]+/u", "", $input);
+        $regExp = static::generateRegExp($allowSpaces, $asciiCharset, ...$languages);
+        return $regExp ? (preg_replace("/[^" . $regExp . "]+/u", "", $input) ?? "") : "";
     }
 
     /**
