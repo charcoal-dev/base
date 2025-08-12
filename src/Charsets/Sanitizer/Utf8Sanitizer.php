@@ -22,6 +22,7 @@ use Charcoal\Base\Enums\Charset;
  */
 class Utf8Sanitizer extends AbstractSanitizer
 {
+    /** @var UnicodeLanguageRangeInterface[] */
     private array $unicodeCharsets = [];
 
     public function __construct(
@@ -50,8 +51,10 @@ class Utf8Sanitizer extends AbstractSanitizer
      */
     protected function validateCharset(string $result): string
     {
-        if (!Utf8::validate($result, $this->allowSpaces, $this->allowAscii, ...$this->unicodeCharsets)) {
-            throw new CharsetSanitizerException(CharsetSanitizerError::CHARSET_ERROR);
+        if ($this->unicodeCharsets) {
+            if (!Utf8::validate($result, $this->allowSpaces, $this->allowAscii, ...$this->unicodeCharsets)) {
+                throw new CharsetSanitizerException(CharsetSanitizerError::CHARSET_ERROR);
+            }
         }
 
         return $result;
