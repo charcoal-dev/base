@@ -187,7 +187,7 @@ abstract class AbstractSanitizer
                 $value = call_user_func($callback, $value);
                 if (!is_string($value)) {
                     throw new CharsetSanitizerException(CharsetSanitizerError::MODIFIER_CALLBACK_TYPE_ERROR,
-                        subject: $capture, index: $index);
+                        subject: $this->onErrorCaptureSubject ? $capture : null, index: $index);
                 }
 
                 $capture = $value;
@@ -208,19 +208,19 @@ abstract class AbstractSanitizer
         if (is_int($this->exactLength)) {
             if ($length !== $this->exactLength) {
                 throw new CharsetSanitizerException(CharsetSanitizerError::LENGTH_ERROR,
-                    subject: $value
+                    subject: $this->onErrorCaptureSubject ? $value : null
                 );
             }
         } elseif ($this->minLength || $this->maxLength) {
             if ($this->minLength && $length < $this->minLength) {
                 throw new CharsetSanitizerException(CharsetSanitizerError::LENGTH_UNDERFLOW_ERROR,
-                    subject: $value
+                    subject: $this->onErrorCaptureSubject ? $value : null
                 );
             }
 
             if ($this->maxLength && $length > $this->maxLength) {
                 throw new CharsetSanitizerException(CharsetSanitizerError::LENGTH_OVERFLOW_ERROR,
-                    subject: $value
+                    subject: $this->onErrorCaptureSubject ? $value : null
                 );
             }
         }
@@ -234,7 +234,7 @@ abstract class AbstractSanitizer
                 $index++;
                 if (!preg_match($regExp, $value)) {
                     throw new CharsetSanitizerException(CharsetSanitizerError::REGEXP_MATCH_ERROR,
-                        subject: $value, index: $index
+                        subject: $this->onErrorCaptureSubject ? $value : null, index: $index
                     );
                 }
             }
@@ -244,12 +244,13 @@ abstract class AbstractSanitizer
 
         // Check if is in defined Array
         if ($this->matchTokens) {
-            if (!in_array($value, $this->matchTokens)) {
-                throw new CharsetSanitizerException(CharsetSanitizerError::ENUM_ERROR, subject: $value);
+            if (!in_array($value, $this->matchTokens, true)) {
+                throw new CharsetSanitizerException(CharsetSanitizerError::ENUM_ERROR,
+                    subject: $this->onErrorCaptureSubject ? $value : null);
             }
         }
 
-        // Modifier Closures
+        // Validation Closures
         if ($this->validationCallbacks) {
             $index = -1;
             foreach ($this->validationCallbacks as $callback) {
@@ -257,12 +258,12 @@ abstract class AbstractSanitizer
                 $result = call_user_func($callback, $value);
                 if (!is_bool($result)) {
                     throw new CharsetSanitizerException(CharsetSanitizerError::VALIDATOR_CALLBACK_TYPE_ERROR,
-                        subject: $value, index: $index);
+                        subject: $this->onErrorCaptureSubject ? $value : null, index: $index);
                 }
 
                 if (!$result) {
                     throw new CharsetSanitizerException(CharsetSanitizerError::VALIDATOR_CALLBACK_FAILED,
-                        subject: $value, index: $index);
+                        subject: $this->onErrorCaptureSubject ? $value : null, index: $index);
                 }
             }
 
