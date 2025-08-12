@@ -10,7 +10,6 @@ namespace Charcoal\Base\Support;
 
 use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
 use Charcoal\Base\Enums\ExceptionAction;
-use Charcoal\Base\Vectors\AbstractTokenVector;
 use Charcoal\Base\Vectors\StringVector;
 
 /**
