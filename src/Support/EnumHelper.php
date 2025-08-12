@@ -32,6 +32,25 @@ class EnumHelper
     }
 
     /**
+     * @param \UnitEnum ...$enums
+     * @return array
+     */
+    public static function filterUniqueFromSet(\UnitEnum ...$enums): array
+    {
+        if (!$enums) {
+            return [];
+        }
+
+        $unique = [];
+        foreach ($enums as $case) {
+            $key = $case::class . "::" . $case->name;
+            $unique[$key] ??= $case;
+        }
+
+        return array_values($unique);
+    }
+
+    /**
      * @param class-string<\BackedEnum> $enumClass
      * @return void
      */

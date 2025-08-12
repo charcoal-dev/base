@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Charcoal\Base\Vectors;
 
 use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
+use Charcoal\Base\Support\EnumHelper;
 
 /**
  * Provides functionality for managing a collection of enumeration values,
@@ -32,14 +33,9 @@ abstract class AbstractEnumVector extends AbstractVector
      */
     public function filterUnique(): static
     {
-        $unique = [];
-        /** @var \UnitEnum $value */
-        foreach ($this->values as $value) {
-            $key = $value::class . "::" . $value->name;
-            $unique[$key] ??= $value;
-        }
-
-        $this->values = array_values($unique);
+        /** @var \UnitEnum[] $values */
+        $values = $this->values;
+        $this->values = EnumHelper::filterUniqueFromSet(...$values);
         return $this;
     }
 
