@@ -38,7 +38,7 @@ final class StringTokenVectorTest extends TestCase
         $tokens->append('A', 'a', 'B', 'b', 'b');
         // Explicitly de-duplicate now
         $tokens->filterUnique();
-        // Should keep first occurrences with original case
+        // Should keep first occurrences with an original case
         $this->assertSame(['A', 'B'], $tokens->getArray());
     }
 

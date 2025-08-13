@@ -19,4 +19,9 @@ interface StringVectorInterface
      * @return string[]
      */
     public function getArray(): array;
+
+    /**
+     * @return $this
+     */
+    public function filterUnique(): static;
 }

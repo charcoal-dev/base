@@ -73,7 +73,7 @@ final class EnumHelperTest extends TestCase
     /**
      * @noinspection PhpUndefinedMethodInspection
      */
-    public function testValidateEnumValuesReturnsValidatedUniqueValuesWithStringVector(): void
+    public function testValidateEnumCasesReturnsValidatedUniqueValuesWithStringVector(): void
     {
         $enumClass = $this->findStringBackedEnumOrSkip();
         $cases = $enumClass::cases();
@@ -82,9 +82,7 @@ final class EnumHelperTest extends TestCase
         // Pick two valid values and duplicate the first one to test de-duplication
         $v1 = $cases[0]->value;
         $v2 = $cases[1]->value ?? $cases[0]->value; // in case there is only one, still valid
-        $vector = new StringVector(...[$v1, $v1, $v2]);
-
-        $validated = EnumHelper::validateEnumValues($enumClass, $vector, ExceptionAction::Throw);
+        $validated = EnumHelper::validateEnumCases($enumClass, ExceptionAction::Throw, $v1, $v1, $v2);
 
         // Expect unique, original order preserved
         $expected = array_values(array_unique([$v1, $v2]));
@@ -95,7 +93,7 @@ final class EnumHelperTest extends TestCase
      * @noinspection PhpUndefinedMethodInspection
      * @noinspection PhpUnhandledExceptionInspection
      */
-    public function testValidateEnumValuesSkipsInvalidWhenOnInvalidIsNotThrow(): void
+    public function testValidateEnumCasesSkipsInvalidWhenOnInvalidIsNotThrow(): void
     {
         $enumClass = $this->findStringBackedEnumOrSkip();
         $cases = $enumClass::cases();
@@ -105,9 +103,8 @@ final class EnumHelperTest extends TestCase
         $invalid = 'invalid-' . bin2hex(random_bytes(4));
 
         $onInvalid = $this->getNonThrowExceptionActionOrSkip();
-        $vector = new StringVector(...[$valid, $invalid, $valid]);
-
-        $validated = EnumHelper::validateEnumValues($enumClass, $vector, $onInvalid);
+        $vector = [$valid, $invalid, $valid];
+        $validated = EnumHelper::validateEnumCases($enumClass, $onInvalid, ...$vector);
 
         // Invalid should be skipped, valid should remain (unique)
         $this->assertSame([$valid], $validated);
@@ -116,14 +113,14 @@ final class EnumHelperTest extends TestCase
     /**
      * @noinspection PhpUnhandledExceptionInspection
      */
-    public function testValidateEnumValuesThrowsOnInvalidWhenThrow(): void
+    public function testValidateEnumCasesThrowsOnInvalidWhenThrow(): void
     {
         $enumClass = $this->findStringBackedEnumOrSkip();
         $invalid = 'invalid-' . bin2hex(random_bytes(4));
         $vector = new StringVector(...[$invalid]);
 
         $this->expectException(\OutOfBoundsException::class);
-        EnumHelper::validateEnumValues($enumClass, $vector, ExceptionAction::Throw);
+        EnumHelper::validatedEnumCasesFromVector($enumClass, $vector, ExceptionAction::Throw);
     }
 
     private function findStringBackedEnumOrSkip(): string
