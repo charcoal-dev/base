@@ -8,10 +8,12 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Vectors;
 
+use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
+
 /**
  * A vector-like structure that stores strings.
  */
-class StringVector extends AbstractVector
+class StringVector extends AbstractVector implements StringVectorInterface
 {
     /**
      * @param string ...$values

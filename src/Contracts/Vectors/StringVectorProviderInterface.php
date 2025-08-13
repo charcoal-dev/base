@@ -13,12 +13,9 @@ use Charcoal\Base\Vectors\StringVector;
 /**
  * StringVectorProviderInterface
  */
-interface StringVectorProviderInterface
+interface StringVectorProviderInterface extends StringVectorInterface
 {
-    public function toStringVector(): StringVector;
+    public function filterUnique(): static;
 
-    /**
-     * @return string[]
-     */
-    public function toStringArray(): array;
+    public function toStringVector(): StringVector;
 }

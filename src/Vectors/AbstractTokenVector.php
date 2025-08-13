@@ -17,6 +17,10 @@ use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
  */
 class AbstractTokenVector extends AbstractVector implements StringVectorProviderInterface
 {
+    /**
+     * @param bool $changeCase
+     * @param bool $uniqueTokensOnly
+     */
     public function __construct(
         public readonly bool $changeCase = true,
         public readonly bool $uniqueTokensOnly = true,
@@ -25,6 +29,10 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         parent::__construct();
     }
 
+    /**
+     * @param string $glue
+     * @return string
+     */
     protected function joinString(string $glue): string
     {
         if (strlen($glue) !== 1) {
@@ -34,6 +42,10 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         return implode($glue, $this->values);
     }
 
+    /**
+     * @param string ...$values
+     * @return $this
+     */
     protected function addTokens(string ...$values): static
     {
         $added = 0;
@@ -49,6 +61,10 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
             $this->filterUnique() : $this;
     }
 
+    /**
+     * @param string $token
+     * @return bool
+     */
     protected function hasToken(string $token): bool
     {
         $token = trim($token);
@@ -70,6 +86,10 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         return false;
     }
 
+    /**
+     * @param string $token
+     * @return bool
+     */
     protected function deleteToken(string $token): bool
     {
         $token = trim($token);
@@ -94,6 +114,9 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         return $deleted;
     }
 
+    /**
+     * @return $this
+     */
     public function filterUnique(): static
     {
         if ($this->changeCase) {
@@ -115,6 +138,10 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         return $this;
     }
 
+    /**
+     * @param string $value
+     * @return string|null
+     */
     protected function normalizeStringValue(string $value): ?string
     {
         $value = trim($value);
@@ -125,18 +152,20 @@ class AbstractTokenVector extends AbstractVector implements StringVectorProvider
         return $this->changeCase ? $this->toLowerCase($value) : $value;
     }
 
+    /**
+     * @param string $value
+     * @return string
+     */
     protected function toLowerCase(string $value): string
     {
         return strtolower($value);
     }
 
+    /**
+     * @return StringVector
+     */
     public function toStringVector(): StringVector
     {
         return new StringVector(...$this->values);
-    }
-
-    public function toStringArray(): array
-    {
-        return $this->getArray();
     }
 }
