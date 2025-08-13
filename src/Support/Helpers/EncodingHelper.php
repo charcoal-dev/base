@@ -17,7 +17,7 @@ class EncodingHelper
      * @param string $input
      * @return bool
      */
-    public function isBase64Encoded(string $input): bool
+    public static function isBase64Encoded(string $input): bool
     {
         return preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $input) && strlen($input) % 4;
     }
