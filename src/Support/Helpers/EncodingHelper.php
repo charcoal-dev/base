@@ -15,10 +15,12 @@ class EncodingHelper
 {
     /**
      * @param string $input
+     * @param bool $lengthCheck
      * @return bool
      */
-    public static function isBase64Encoded(string $input): bool
+    public static function isBase64Encoded(string $input, bool $lengthCheck): bool
     {
-        return preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $input) && strlen($input) % 4;
+        return preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $input) === 1 &&
+            (!$lengthCheck || strlen($input) % 4 === 0);
     }
 }
