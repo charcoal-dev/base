@@ -10,6 +10,7 @@ namespace Charcoal\Base\Abstracts\Dataset;
 
 use Charcoal\Base\Enums\ExceptionAction;
 use Charcoal\Base\Enums\ValidationState;
+use Charcoal\Base\Exceptions\WrappedException;
 use Charcoal\Base\Support\Data\BatchEnvelope;
 use Charcoal\Base\Support\Data\CheckedKeyValue;
 
@@ -26,27 +27,16 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
 
     /**
      * @param DatasetPolicy $policy
-     * @param BatchEnvelope|null $initialData
+     * @param BatchEnvelope|null $seed
+     * @throws WrappedException
      */
     public function __construct(
         public readonly DatasetPolicy $policy,
-        ?BatchEnvelope                $initialData = null
+        ?BatchEnvelope                $seed = null
     )
     {
-        if ($initialData && $initialData->items) {
-            foreach ($initialData->items as $key => $value) {
-                try {
-                    $this->storeEntry($key, $value);
-                } catch (\Throwable $t) {
-                    if ($initialData->onError === ExceptionAction::Throw) {
-                        throw $t;
-                    }
-
-                    if ($initialData->onError === ExceptionAction::Log && $initialData->errorLogger) {
-                        ($initialData->errorLogger)($key, $t);
-                    }
-                }
-            }
+        if($seed) {
+            $this->storeFromBatchEnvelope($seed);
         }
     }
 
@@ -92,6 +82,37 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
     protected function normalizeAccessKey(string $key): string
     {
         return strtolower(trim($key));
+    }
+
+    /**
+     * @param BatchEnvelope $batch
+     * @return int
+     * @throws WrappedException
+     */
+    protected function storeFromBatchEnvelope(BatchEnvelope $batch): int
+    {
+        if (!$batch->items) {
+            return 0;
+        }
+
+        $stored = 0;
+        foreach ($batch->items as $key => $value) {
+            try {
+                $this->storeEntry($key, $value);
+                $stored++;
+            } catch (\Throwable $t) {
+                if ($batch->onError === ExceptionAction::Throw) {
+                    throw new WrappedException($t, static::class . " encountered " . $t::class .
+                        " during store fn from batch envelope");
+                }
+
+                if ($batch->onError === ExceptionAction::Log && $batch->errorLogger) {
+                    ($batch->errorLogger)($key, $t);
+                }
+            }
+        }
+
+        return $stored;
     }
 
     /**
