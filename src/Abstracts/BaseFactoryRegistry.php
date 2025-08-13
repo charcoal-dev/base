@@ -16,7 +16,7 @@ use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
  * @template T of object
  * @property  array<string,T> $instances
  */
-abstract class AbstractFactoryRegistry
+abstract class BaseFactoryRegistry
 {
     protected array $instances = [];
 
@@ -27,17 +27,6 @@ abstract class AbstractFactoryRegistry
      * @return T
      */
     abstract protected function create(string $key): object;
-
-    /**
-     * @param T $instance
-     * @param string $key
-     * @return T
-     */
-    protected function store(object $instance, string $key): object
-    {
-        $this->instances[$key] = $instance;
-        return $instance;
-    }
 
     /**
      * @param string $key
@@ -51,6 +40,19 @@ abstract class AbstractFactoryRegistry
             return $this->instances[$key];
         }
 
-        return $this->store($this->create($key), $key);
+        return $this->store($this->create($key), $key, true);
+    }
+
+    /**
+     * @param object $instance
+     * @param string $key
+     * @param bool $normalized
+     * @return T
+     */
+    protected function store(object $instance, string $key, bool $normalized): object
+    {
+        $key = $normalized ? $key : $this->normalizeRegistryKey($key);
+        $this->instances[$key] = $instance;
+        return $instance;
     }
 }

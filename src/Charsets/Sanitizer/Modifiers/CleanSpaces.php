@@ -10,7 +10,7 @@ namespace Charcoal\Base\Charsets\Sanitizer\Modifiers;
 
 use Charcoal\Base\Contracts\Charsets\SanitizerModifierInterface;
 use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Support\StringHelper;
+use Charcoal\Base\Support\Helpers\StringHelper;
 
 /**
  * CleanSpaces Modifier

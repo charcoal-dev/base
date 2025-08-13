@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Support\Helpers;
 
-
 use Charcoal\Base\Enums\ExceptionAction;
 
 /**

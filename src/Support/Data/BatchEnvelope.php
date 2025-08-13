@@ -22,12 +22,12 @@ use Charcoal\Base\Enums\ExceptionAction;
 readonly class BatchEnvelope
 {
     /**
-     * @param array $data
+     * @param array $items
      * @param ExceptionAction $onError
      * @param (\Closure(string|int, \Throwable): void)|null $errorLogger
      */
     public function __construct(
-        public array           $data,
+        public array           $items,
         public ExceptionAction $onError = ExceptionAction::Throw,
         public ?\Closure       $errorLogger = null,
     )

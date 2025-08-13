@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Charcoal\Base\Vectors;
 
 use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
-use Charcoal\Base\Support\EnumHelper;
+use Charcoal\Base\Support\Helpers\EnumHelper;
 
 /**
  * Provides functionality for managing a collection of enumeration values,
