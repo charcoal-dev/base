@@ -18,4 +18,22 @@ enum ValidationState: int
     case NORMALIZED = 2;
     case VALIDATED = 3;
     case TRUSTED = 4;
+
+    /**
+     * @param ValidationState $other
+     * @return bool
+     */
+    public function meets(ValidationState $other): bool
+    {
+        return $this->value >= $other->value;
+    }
+
+    /**
+     * @param ValidationState $other
+     * @return bool
+     */
+    public function fails(ValidationState $other): bool
+    {
+        return $this->value < $other->value;
+    }
 }
