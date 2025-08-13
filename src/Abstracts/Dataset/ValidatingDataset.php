@@ -35,7 +35,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
         ?BatchEnvelope                $seed = null
     )
     {
-        if($seed) {
+        if ($seed) {
             $this->storeFromBatchEnvelope($seed);
         }
     }
@@ -182,7 +182,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
     }
 
     /**
-     * @return array<string,T>
+     * @return array<string,mixed>
      */
     final public function getArray(): array
     {
@@ -196,6 +196,14 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
             return $data;
         }
 
+        return $this->dataset;
+    }
+
+    /**
+     * @return array<string,T>
+     */
+    final public function getDataset(): array
+    {
         return $this->dataset;
     }
 
