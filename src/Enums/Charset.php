@@ -8,10 +8,12 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Enums;
 
+use Charcoal\Base\Contracts\Enums\CharsetEnumInterface;
+
 /**
  * This enum provides constants for common character encodings, such as ASCII and UTF-8.
  */
-enum Charset: string
+enum Charset: string implements CharsetEnumInterface
 {
     case ASCII = "ASCII";
     case UTF8 = "UTF-8";
