@@ -28,8 +28,12 @@ readonly class DatasetPolicy
         public ValidationState    $valueTrust = ValidationState::RAW,
     )
     {
-        if (!$this->setterKeyTrust->meets($this->accessKeyTrust)) {
-            throw new \InvalidArgumentException("Setter key trust cannot be less restrictive than access key trust");
+        if (!$this->accessKeyTrust->meets($this->setterKeyTrust)) {
+            throw new \InvalidArgumentException(
+                sprintf("Invalid trust levels: setter=%s (%d) must be <= access=%s (%d)",
+                    $this->setterKeyTrust->name, $this->setterKeyTrust->value,
+                    $this->accessKeyTrust->name, $this->accessKeyTrust->value
+                ));
         }
     }
 }
