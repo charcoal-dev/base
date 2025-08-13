@@ -24,6 +24,10 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
     /** @var array<string,T> $dataset */
     private array $dataset = [];
 
+    /**
+     * @param DatasetPolicy $policy
+     * @param BatchEnvelope|null $initialData
+     */
     public function __construct(
         public readonly DatasetPolicy $policy,
         ?BatchEnvelope                $initialData = null
@@ -35,7 +39,6 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
                     $this->storeEntry($key, $value);
                 } catch (\Throwable $t) {
                     if ($initialData->onError === ExceptionAction::Throw) {
-                        /** @noinspection PhpUnhandledExceptionInspection */
                         throw $t;
                     }
 
