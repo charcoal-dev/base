@@ -214,4 +214,13 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
     {
         return new \ArrayIterator($this->dataset);
     }
+
+    /**
+     * @return void
+     * @api
+     */
+    protected function flushEntries(): void
+    {
+        $this->dataset = [];
+    }
 }
