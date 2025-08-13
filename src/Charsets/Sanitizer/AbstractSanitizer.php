@@ -12,7 +12,7 @@ use Charcoal\Base\Charsets\Sanitizer\Exception\CharsetSanitizerError;
 use Charcoal\Base\Charsets\Sanitizer\Exception\CharsetSanitizerException;
 use Charcoal\Base\Contracts\Charsets\SanitizerModifierInterface;
 use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Support\EnumHelper;
+use Charcoal\Base\Support\Helpers\EnumHelper;
 
 /**
  * Abstract class for sanitization, providing methods to apply and validate a set of rules
