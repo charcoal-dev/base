@@ -15,14 +15,21 @@ namespace Charcoal\Base\Traits;
  */
 trait EnumOptionsTrait
 {
+    /**
+     * @return bool
+     */
     protected static function isBackedEnum(): bool
     {
         return is_subclass_of(static::class, \BackedEnum::class);
     }
 
-    protected static function getEnumMap(): array
+    /**
+     * @return array<string, string|int|null>
+     */
+    protected static function getCaseMap(): array
     {
         $options = [];
+        /** @var \UnitEnum $case */
         foreach (static::cases() as $case) {
             $options[$case->name] = $case->value ?? null;
         }
@@ -30,20 +37,29 @@ trait EnumOptionsTrait
         return $options;
     }
 
-    public static function getOptions(): array
+    /**
+     * @return array<string>|array<string|int>
+     */
+    public static function getCases(): array
     {
         return static::isBackedEnum() ?
-            static::getEnumValues() : static::getEnumKeys();
+            static::getCaseNames() : static::getCaseValues();
     }
 
-    public static function getEnumKeys(): array
+    /**
+     * @return array<string>
+     */
+    public static function getCaseNames(): array
     {
-        return array_keys(static::getEnumMap());
+        return array_keys(static::getCaseMap());
     }
 
-    public static function getEnumValues(): ?array
+    /**
+     * @return null|array<string|int>
+     */
+    public static function getCaseValues(): ?array
     {
         return static::isBackedEnum() ?
-            array_values(static::getEnumMap()) : null;
+            array_values(static::getCaseMap()) : null;
     }
 }
