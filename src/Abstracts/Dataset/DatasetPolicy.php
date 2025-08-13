@@ -19,14 +19,17 @@ readonly class DatasetPolicy
      * @param DatasetStorageMode $mode Storage mode for the dataset
      * @param ValidationState $accessKeyTrust Validation checks on keys provided to access (has/get/delete) methods
      * @param ValidationState $setterKeyTrust Validation checks on keys provided to setter methods
-     * @param ValidationState $setterValueTrust Validation checks on values provided to setter methods
+     * @param ValidationState $valueTrust Validation checks on values provided to setter methods
      */
     public function __construct(
         public DatasetStorageMode $mode = DatasetStorageMode::ENTRY_OBJECTS,
         public ValidationState    $accessKeyTrust = ValidationState::RAW,
         public ValidationState    $setterKeyTrust = ValidationState::RAW,
-        public ValidationState    $setterValueTrust = ValidationState::RAW,
+        public ValidationState    $valueTrust = ValidationState::RAW,
     )
     {
+        if (!$this->setterKeyTrust->meets($this->accessKeyTrust)) {
+            throw new \InvalidArgumentException("Setter key trust cannot be less restrictive than access key trust");
+        }
     }
 }

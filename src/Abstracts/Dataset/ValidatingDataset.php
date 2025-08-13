@@ -78,7 +78,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
      */
     final protected function policyValidateEntryValue(mixed $value, string $validatedKey): mixed
     {
-        return $this->policy->setterValueTrust->meets(ValidationState::VALIDATED) ?
+        return $this->policy->valueTrust->meets(ValidationState::VALIDATED) ?
             $value : $this->validateEntryValue($value, $validatedKey);
     }
 
@@ -103,7 +103,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
         $accessKey = $this->normalizeAccessKey($key);
         $value = $this->policyValidateEntryValue($value, $key);
         $this->dataset[$accessKey] = $this->policy->mode === DatasetStorageMode::ENTRY_OBJECTS ?
-            new CheckedKeyValue($key, $value, $this->policy->setterValueTrust) : $value;
+            new CheckedKeyValue($key, $value, $this->policy->valueTrust) : $value;
 
         return $this;
     }
