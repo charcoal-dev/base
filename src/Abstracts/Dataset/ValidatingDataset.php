@@ -88,7 +88,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
      */
     protected function normalizeAccessKey(string $key): string
     {
-        return strtolower($key);
+        return strtolower(trim($key));
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class ValidatingDataset implements \IteratorAggregate, \Countable
         $accessKey = $this->normalizeAccessKey($key);
         $value = $this->policyValidateEntryValue($value, $key);
         $this->dataset[$accessKey] = $this->policy->mode === DatasetStorageMode::ENTRY_OBJECTS ?
-            new CheckedKeyValue($key, $value, $this->policy->valueTrust) : $value;
+            new CheckedKeyValue($key, $value, ValidationState::VALIDATED) : $value;
 
         return $this;
     }
