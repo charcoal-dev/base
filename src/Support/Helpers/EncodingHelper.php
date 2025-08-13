@@ -23,4 +23,24 @@ class EncodingHelper
         return preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $input) === 1 &&
             (!$lengthCheck || strlen($input) % 4 === 0);
     }
+
+    /**
+     * @param string $input
+     * @param bool $paddingCheck
+     * @return bool
+     */
+    public static function isBase64UrlEncoded(string $input, bool $paddingCheck): bool
+    {
+        if (preg_match('/^[A-Za-z0-9\-_]+={0,2}$/', $input) === 1) {
+            if ($paddingCheck) {
+                if (!in_array(strlen($input) % 4, [0, 2, 3])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }
