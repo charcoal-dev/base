@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests;
 
+use Charcoal\Base\Support\Helpers\ObjectHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Charcoal\Base\Support\ObjectHelper;
 
 final class ObjectHelperTest extends TestCase
 {

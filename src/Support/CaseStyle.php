@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Support;
 
+use Charcoal\Base\Support\Helpers\CaseStyleHelper;
+
 /**
  * Enumeration representing various case styles for string transformation.
  */

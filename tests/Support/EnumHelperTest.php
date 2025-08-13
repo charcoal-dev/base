@@ -14,7 +14,7 @@ use Charcoal\Base\Enums\FetchOrigin;
 use Charcoal\Base\Enums\PrimitiveType;
 use Charcoal\Base\Enums\StorageType;
 use Charcoal\Base\Enums\ValidationState;
-use Charcoal\Base\Support\EnumHelper;
+use Charcoal\Base\Support\Helpers\EnumHelper;
 use Charcoal\Base\Vectors\StringVector;
 use PHPUnit\Framework\TestCase;
 

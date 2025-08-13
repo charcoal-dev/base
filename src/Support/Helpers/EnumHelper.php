@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support;
+namespace Charcoal\Base\Support\Helpers;
 
 use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
 use Charcoal\Base\Enums\ExceptionAction;

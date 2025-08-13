@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Charcoal\Base\Tests\Support;
 
 use Charcoal\Base\Support\CaseStyle;
-use Charcoal\Base\Support\CaseStyleHelper;
+use Charcoal\Base\Support\Helpers\CaseStyleHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
