@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Vectors;
 
+use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
 use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
 
 /**
@@ -15,7 +16,9 @@ use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
  * providing functionality to normalize, append, check, delete, and filter unique string tokens.
  * The behavior of token normalization and uniqueness is configurable through public properties.
  */
-class AbstractTokenVector extends AbstractVector implements StringVectorProviderInterface
+class AbstractTokenVector extends AbstractVector implements
+    StringVectorProviderInterface,
+    StringVectorInterface
 {
     /**
      * @param bool $changeCase

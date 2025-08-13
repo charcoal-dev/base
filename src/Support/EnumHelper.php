@@ -8,9 +8,8 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Support;
 
-use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
+use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
 use Charcoal\Base\Enums\ExceptionAction;
-use Charcoal\Base\Vectors\StringVector;
 
 /**
  * Provides helper methods for handling operations related to enums.
@@ -71,20 +70,52 @@ class EnumHelper
 
     /**
      * @param class-string<\BackedEnum> $enumClass
-     * @param StringVector|StringVectorProviderInterface $values
+     * @param ExceptionAction $onInvalid
+     * @param string[] $values
+     * @return string[]
+     */
+    public static function validateEnumCases(
+        string          $enumClass,
+        ExceptionAction $onInvalid = ExceptionAction::Throw,
+        string          ...$values
+    ): array
+    {
+        return static::validateEnumCasesInternal($onInvalid, $enumClass, array_unique($values));
+    }
+
+    /**
+     * @param class-string<\BackedEnum> $enumClass
+     * @param StringVectorInterface $vector
      * @param ExceptionAction $onInvalid
      * @return string[]
      */
-    public static function validateEnumValues(
-        string                                     $enumClass,
-        StringVector|StringVectorProviderInterface $values,
-        ExceptionAction                            $onInvalid = ExceptionAction::Throw
+    public static function validatedEnumCasesFromVector(
+        string                $enumClass,
+        StringVectorInterface $vector,
+        ExceptionAction       $onInvalid = ExceptionAction::Throw,
+    ): array
+    {
+        return static::validateEnumCasesInternal($onInvalid, $enumClass,
+            $vector->filterUnique()->getArray());
+    }
+
+    /**
+     * @param ExceptionAction $onInvalid
+     * @param class-string<\BackedEnum> $enumClass
+     * @param array $uniqueValues
+     * @return array
+     * @internal
+     */
+    protected static function validateEnumCasesInternal(
+        ExceptionAction $onInvalid,
+        string          $enumClass,
+        array           $uniqueValues
     ): array
     {
         static::validateStringBacked($enumClass);
-        $values = $values->filterUnique()->getArray();
+
         $validated = [];
-        foreach ($values as $value) {
+        foreach ($uniqueValues as $value) {
             if (!$enumClass::tryFrom($value)) {
                 if ($onInvalid !== ExceptionAction::Throw) {
                     continue;
