@@ -13,7 +13,7 @@ namespace Charcoal\Base\Traits;
  * is a backed enum, retrieving enum case mappings, and extracting keys
  * or values from enum definitions.
  */
-trait EnumOptionsTrait
+trait EnumMappingTrait
 {
     /**
      * @return bool
