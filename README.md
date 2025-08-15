@@ -9,7 +9,6 @@ Core traits, abstract classes, enums, and lightweight event tools for Charcoal a
 ## Features
 
 - Reusable OOP traits and base classes
-- Simple event emitter and event handling tools
 - Common enums for type safety
 - Minimal, dependency-free foundation for all Charcoal packages
 
