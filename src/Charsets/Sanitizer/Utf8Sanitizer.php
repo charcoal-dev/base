@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Charsets\Sanitizer;
 
-use Charcoal\Base\Charsets\Sanitizer\Exception\CharsetSanitizerError;
-use Charcoal\Base\Charsets\Sanitizer\Exception\CharsetSanitizerException;
+use Charcoal\Base\Charsets\Sanitizer\Exceptions\CharsetSanitizerError;
+use Charcoal\Base\Charsets\Sanitizer\Exceptions\CharsetSanitizerException;
 use Charcoal\Base\Charsets\Utf8;
 use Charcoal\Base\Contracts\Charsets\UnicodeLanguageRangeInterface;
 use Charcoal\Base\Enums\Charset;

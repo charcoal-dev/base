@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Charsets\Sanitizer\Exception;
+namespace Charcoal\Base\Charsets\Sanitizer\Exceptions;
 
 /**
  * Represents an exception thrown during charset sanitization operations.
