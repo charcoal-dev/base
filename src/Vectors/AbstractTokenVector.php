@@ -15,6 +15,7 @@ use Charcoal\Base\Contracts\Vectors\StringVectorProviderInterface;
  * AbstractTokenVector is an abstract class that manages a collection of string tokens,
  * providing functionality to normalize, append, check, delete, and filter unique string tokens.
  * The behavior of token normalization and uniqueness is configurable through public properties.
+ * @extends AbstractVector<string>
  */
 class AbstractTokenVector extends AbstractVector implements
     StringVectorProviderInterface,

@@ -14,6 +14,8 @@ use Charcoal\Base\Support\Helpers\EnumHelper;
 /**
  * Provides functionality for managing a collection of enumeration values,
  * including optional enforcement of unique tokens only.
+ * @template T of \UnitEnum
+ * @extends AbstractVector<T>
  * @see StringVectorProviderInterface
  */
 abstract class AbstractEnumVector extends AbstractVector
