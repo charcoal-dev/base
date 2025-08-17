@@ -10,11 +10,16 @@ namespace Charcoal\Base\Vectors;
 
 /**
  * Abstract base class representing a vector-like structure.
+ * @template T of mixed
  */
 abstract class AbstractVector implements \IteratorAggregate, \Countable
 {
+    /** @var array<int,T> */
     protected array $values;
 
+    /**
+     * @param array<int,T>|null $vector
+     */
     protected function __construct(?array $vector = null)
     {
         $this->values = $vector ?? [];
@@ -25,11 +30,17 @@ abstract class AbstractVector implements \IteratorAggregate, \Countable
         return count($this->values);
     }
 
+    /**
+     * @return \Traversable<int,T>
+     */
     final public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->values);
     }
 
+    /**
+     * @return array<int,T>
+     */
     final public function getArray(): array
     {
         return $this->values;

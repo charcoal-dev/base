@@ -12,6 +12,7 @@ use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
 
 /**
  * A vector-like structure that stores strings.
+ * @extends AbstractVector<string>
  */
 class StringVector extends AbstractVector implements StringVectorInterface
 {
