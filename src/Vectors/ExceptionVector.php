@@ -10,6 +10,7 @@ namespace Charcoal\Base\Vectors;
 
 /**
  * A vector-like structure that stores exceptions.
+ * @extends AbstractVector<\Throwable>
  */
 class ExceptionVector extends AbstractVector
 {
