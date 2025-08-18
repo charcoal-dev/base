@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support;
+namespace Charcoal\Base\Support\Helpers;
 
 /**
  * Helper class for handling errors and converting them into exceptions.

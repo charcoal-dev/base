@@ -44,4 +44,14 @@ class ObjectHelper
         return $pos === false ? $fqCn : substr($fqCn, $pos + 1);
     }
 
+    /**
+     * @param object $object
+     * @param int $maxDepth
+     * @param string|null $recursiveItemLabel
+     * @return array
+     */
+    public static function break(object $object, int $maxDepth = 10, ?string $recursiveItemLabel = null): array
+    {
+        return DtoHelper::createFrom($object, $maxDepth, true, true, $recursiveItemLabel);
+    }
 }
