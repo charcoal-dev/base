@@ -13,7 +13,7 @@ namespace Charcoal\Base\Enums;
  */
 enum StorageType: string
 {
-    case CACHE = "cache";
-    case DATABASE = "db";
-    case FILESYSTEM = "filesystem";
+    case Cache = "cache";
+    case Database = "db";
+    case Filesystem = "filesystem";
 }

@@ -13,7 +13,7 @@ namespace Charcoal\Base\Enums;
  */
 enum FetchOrigin: string
 {
-    case CACHE = "cache";
-    case RUNTIME = "runtime";
-    case DATABASE = "db";
+    case Cache = "cache";
+    case Runtime = "runtime";
+    case Database = "db";
 }
