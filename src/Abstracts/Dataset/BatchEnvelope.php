@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Data;
+namespace Charcoal\Base\Abstracts\Dataset;
 
 use Charcoal\Base\Enums\ExceptionAction;
 

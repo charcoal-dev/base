@@ -14,9 +14,9 @@ use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
  * Abstract base class for managing and creating instances of various objects.
  * Uses a normalized key-based storage mechanism to manage object instances.
  * @template T of object
- * @property  array<string,T> $instances
+ * @property array<string,T> $instances
  */
-abstract class BaseFactoryRegistry
+abstract class AbstractFactoryRegistry
 {
     protected array $instances = [];
 
