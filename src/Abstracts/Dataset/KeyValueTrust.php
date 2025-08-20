@@ -14,6 +14,8 @@ use Charcoal\Base\Enums\ValidationState;
  * Represents a key-value pair with an associated trust state.
  * This class is immutable and extends the base KeyValue class.
  * It uses a ValidationState instance to denote its trust level.
+ * @template T of mixed
+ * @extends KeyValue<T>
  */
 readonly class KeyValueTrust extends KeyValue
 {

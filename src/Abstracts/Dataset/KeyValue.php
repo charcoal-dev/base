@@ -12,6 +12,7 @@ namespace Charcoal\Base\Abstracts\Dataset;
  * This class is designed to store a key of type string and an associated value
  * of any type. Both properties are publicly accessible but read-only, ensuring
  * that once an instance is created, its data cannot be modified.
+ * @template T of mixed
  */
 readonly class KeyValue
 {
