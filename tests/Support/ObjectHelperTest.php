@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Tests;
+namespace Charcoal\Base\Tests\Support;
 
 use Charcoal\Base\Support\Helpers\ObjectHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -58,7 +58,7 @@ final class ObjectHelperTest extends TestCase
         $this->assertTrue(ObjectHelper::isValidClass(\stdClass::class));
 
         // Test fixtures (declared above)
-        $this->assertTrue(ObjectHelper::isValidClass('Charcoal\Base\Tests\ObjectHelperTest'));
+        $this->assertTrue(ObjectHelper::isValidClass('Charcoal\Base\Tests\Support\ObjectHelperTest'));
     }
 
     public function testIsValidClassRejectsNonExistingOrInvalid(): void
