@@ -13,7 +13,7 @@ use Charcoal\Base\Vectors\AbstractTokenVector;
 /**
  * A helper class that provides utility methods for working with DTOs.
  */
-class DtoHelper
+abstract readonly class DtoHelper
 {
     /**
      * @param array|object $object

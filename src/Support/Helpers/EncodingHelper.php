@@ -11,7 +11,7 @@ namespace Charcoal\Base\Support\Helpers;
 /**
  * A helper class that provides utility methods for working with encoding.
  */
-class EncodingHelper
+abstract readonly class EncodingHelper
 {
     /**
      * @param string $input

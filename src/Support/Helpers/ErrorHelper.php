@@ -11,7 +11,7 @@ namespace Charcoal\Base\Support\Helpers;
 /**
  * Helper class for handling errors and converting them into exceptions.
  */
-class ErrorHelper
+abstract readonly class ErrorHelper
 {
     /**
      * @return \RuntimeException|null

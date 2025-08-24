@@ -21,15 +21,11 @@ class Base16Helper
      */
     public static function isBase16Encoded(string $input): bool
     {
-        if (!$input) {
-            return false;
-        }
-
-        if (str_starts_with($input, "0x")) {
-            $input = substr($input, 2);
-        }
-
-        return ctype_xdigit($input);
+        return match (true) {
+            !$input => false,
+            str_starts_with($input, "0x") => ctype_xdigit(substr($input, 2)),
+            default => ctype_xdigit($input),
+        };
     }
 
     /**

@@ -11,22 +11,20 @@ namespace Charcoal\Base\Support\Helpers;
 /**
  * A helper class that provides utility methods for working with objects and class paths.
  */
-class ObjectHelper
+abstract readonly class ObjectHelper
 {
     /**
-     * @param string $path
-     * @return bool
+     * Checks if the given class or namespace path is valid.
      */
     public static function isValidClassname(string $path): bool
     {
         if (empty($path)) return false;
         $path = ltrim($path, "\\");
-        return (bool)preg_match('/^(?:[A-Za-z_][A-Za-z0-9_]*\\\\)*[A-Za-z_][A-Za-z0-9_]*$/', $path);
+        return (bool)preg_match("/^(?:[A-Za-z_][A-Za-z0-9_]*\\\\)*[A-Za-z_][A-Za-z0-9_]*$/", $path);
     }
 
     /**
-     * @param string $path
-     * @return bool
+     * Checks if the given class path is valid and exists.
      */
     public static function isValidClass(string $path): bool
     {
@@ -34,8 +32,7 @@ class ObjectHelper
     }
 
     /**
-     * @param object|class-string $class
-     * @return string
+     * Returns the base class name of the given class.
      */
     public static function baseClassName(object|string $class): string
     {
@@ -45,10 +42,8 @@ class ObjectHelper
     }
 
     /**
-     * @param object $object
-     * @param int $maxDepth
-     * @param string|null $recursiveItemLabel
-     * @return array
+     * Breaks an object into an array comprising all scalar properties.
+     * Works recursively on nested objects.
      */
     public static function break(object $object, int $maxDepth = 10, ?string $recursiveItemLabel = null): array
     {

@@ -14,7 +14,7 @@ use Charcoal\Base\Enums\ExceptionAction;
 /**
  * Provides helper methods for handling operations related to enums.
  */
-class EnumHelper
+abstract readonly class EnumHelper
 {
     /**
      * @param string $enumClass

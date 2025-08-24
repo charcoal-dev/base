@@ -11,7 +11,7 @@ namespace Charcoal\Base\Support\Helpers;
 /**
  * A helper class that provides utility methods for working with case styles.
  */
-class CaseStyleHelper
+abstract readonly class CaseStyleHelper
 {
     /**
      * @param string $input
