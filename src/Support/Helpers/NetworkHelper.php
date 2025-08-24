@@ -15,6 +15,34 @@ namespace Charcoal\Base\Support\Helpers;
 abstract readonly class NetworkHelper
 {
     /**
+     * Checks if the given hostname is valid.
+     * @param bool $allowIpAddr Whether to allow IP addresses as valid hostnames.
+     * @param bool $allowNonTld Whether to allow non-top-level domains as valid hostnames.
+     */
+    public static function isValidHostname(
+        string $hostname,
+        bool   $allowIpAddr = false,
+        bool   $allowNonTld = false
+    ): bool
+    {
+        if (!$hostname) {
+            return false;
+        }
+
+        $label = "[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?";
+        $fqdn = "/\A(?=.{1,253}\z)(?:" . $label . "\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{1,59})\.?\z/";
+        if (preg_match($fqdn, $hostname)) {
+            return true;
+        }
+
+        return match (true) {
+            $allowNonTld && preg_match("/\A" . $label . "\z/", $hostname) => true,
+            $allowIpAddr && self::isValidIp($hostname) !== false => true,
+            default => false,
+        };
+    }
+
+    /**
      * Checks if the given IP address is valid and returns its version.
      */
     public static function isValidIp(string $ip): int|false
