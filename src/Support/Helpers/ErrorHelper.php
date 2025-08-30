@@ -26,4 +26,18 @@ abstract readonly class ErrorHelper
 
         return null;
     }
+
+    /**
+     * Retrieves the chain of exceptions leading to the provided exception.
+     */
+    public static function getExceptionChain(\Throwable $exception, bool $reverse = false): array
+    {
+        $chained = [$exception];
+        while ($exception->getPrevious()) {
+            $exception = $exception->getPrevious();
+            $chained[] = $exception;
+        }
+
+        return !$reverse ? $chained : array_reverse($chained);
+    }
 }
