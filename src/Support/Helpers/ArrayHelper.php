@@ -11,7 +11,7 @@ namespace Charcoal\Base\Support\Helpers;
 /**
  * A helper class that provides utility methods for working with arrays.
  */
-abstract class ArrayHelper
+abstract readonly class ArrayHelper
 {
     /**
      * @param array $data
