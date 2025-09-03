@@ -13,7 +13,7 @@ use Charcoal\Base\Enums\ExceptionAction;
 /**
  * A helper class that provides utility methods for working with base16.
  */
-class Base16Helper
+abstract class Base16Helper
 {
     /**
      * @param string $input
