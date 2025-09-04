@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Traits;
 
+use Charcoal\Base\Objects\Traits\NoDumpTrait;
 use Charcoal\Base\Tests\Fixtures\CompositeTraitsFixture;
-use Charcoal\Base\Traits\NoDumpTrait;
 use PHPUnit\Framework\TestCase;
 
 class CompositeTraitsTest extends TestCase
