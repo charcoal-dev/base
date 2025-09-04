@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Enums\Traits;
 
 /**
  * This trait includes methods for determining if the implementing class

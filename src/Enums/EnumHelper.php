@@ -6,10 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Helpers;
+namespace Charcoal\Base\Enums;
 
-use Charcoal\Base\Contracts\Vectors\StringVectorInterface;
-use Charcoal\Base\Enums\ExceptionAction;
+use Charcoal\Base\Objects\ObjectHelper;
+use Charcoal\Contracts\Errors\ExceptionAction;
+use Charcoal\Contracts\Vectors\StringVectorInterface;
 
 /**
  * Provides helper methods for handling operations related to enums.
@@ -96,7 +97,7 @@ abstract readonly class EnumHelper
     ): array
     {
         return static::validateEnumCasesInternal($onInvalid, $enumClass,
-            $vector->filterUnique()->getArray());
+            array_values(array_unique($vector->getArray(), SORT_STRING)));
     }
 
     /**
