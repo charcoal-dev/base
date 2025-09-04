@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Callbacks;
+namespace Charcoal\Base\Support;
 
-use Charcoal\Base\Contracts\Callbacks\SerializableCallback;
+use Charcoal\Contracts\Serialization\SerializableCallback;
 
 /**
  * This class allows storing a callable (static method or function) along
@@ -25,15 +25,15 @@ readonly class StaticCallback implements SerializableCallback
      * @param bool|string|int|null ...$args
      * @return self
      */
-    public static function getSerializable(string|array $callback, bool|string|int|null ...$args): self
+    public static function getSerializable(string|array $callback, bool|string|int|null ...$args): static
     {
-        return new self($callback, ...$args);
+        return new static($callback, ...$args);
     }
 
     /**
      * Constructor for initializing the callback and its arguments.
      */
-    private function __construct(string|array $callback, bool|string|int|null ...$args)
+    public function __construct(string|array $callback, bool|string|int|null ...$args)
     {
         $callback = is_string($callback) && str_contains($callback, "::") ?
             explode("::", $callback) : $callback;
@@ -56,7 +56,7 @@ readonly class StaticCallback implements SerializableCallback
     /**
      * Invokes the callback with the given arguments.
      */
-    public function invoke(mixed ...$args): string
+    public function invoke(mixed ...$args): mixed
     {
         if (!is_callable($this->callback)) {
             throw new \RuntimeException(self::class . ': method ' . $this->callback[1] . ' of class ' .

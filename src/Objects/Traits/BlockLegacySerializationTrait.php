@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
 
 /**
  * Provides functionality to prevent instances of a class from being serialized, unserialized, or exported.

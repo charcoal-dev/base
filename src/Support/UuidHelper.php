@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Helpers;
+namespace Charcoal\Base\Support;
 
 use Random\RandomException;
 

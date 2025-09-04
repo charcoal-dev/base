@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
 
 /**
  * Provides controlled serialization support for classes by enforcing

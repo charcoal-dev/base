@@ -6,9 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support;
-
-use Charcoal\Base\Support\Helpers\CaseStyleHelper;
+namespace Charcoal\Base\Strings;
 
 /**
  * Enumeration representing various case styles for string transformation.
