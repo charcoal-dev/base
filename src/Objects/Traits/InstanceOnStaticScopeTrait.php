@@ -64,7 +64,7 @@ trait InstanceOnStaticScopeTrait
      * Retrieves the existing instance of the class or,
      * initializes a new one if it does not already exist.
      */
-    protected function getOrCreateInstance(): static
+    protected static function getOrCreateInstance(): static
     {
         if (!static::$instance) {
             static::initialize();
