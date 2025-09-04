@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Helpers;
+namespace Charcoal\Base\Arrays;
 
-use Charcoal\Base\Vectors\AbstractTokenVector;
+use Charcoal\Contracts\Vectors\StringVectorInterface;
 
 /**
  * A helper class that provides utility methods for working with DTOs.
@@ -89,7 +89,7 @@ abstract readonly class DtoHelper
                 $context = match (true) {
                     $context instanceof \JsonSerializable => $context->jsonSerialize(),
                     $context instanceof \Traversable => iterator_to_array($context, true),
-                    $context instanceof AbstractTokenVector => $context->getArray(),
+                    $context instanceof StringVectorInterface => $context->getArray(),
                     default => $context,
                 };
             }
