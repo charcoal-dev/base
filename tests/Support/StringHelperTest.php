@@ -19,32 +19,32 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
     public function testCleanSpaces_collapsesWhitespaceAndTrims(): void
     {
-        $this->assertSame("foo bar baz", \Charcoal\Base\Support\Helpers\StringHelper::cleanSpaces("  foo\t\tbar \n baz  "));
-        $this->assertSame("a b c", \Charcoal\Base\Support\Helpers\StringHelper::cleanSpaces("a   b\tc"));
+        $this->assertSame("foo bar baz", \Charcoal\Base\Strings\StringHelper::cleanSpaces("  foo\t\tbar \n baz  "));
+        $this->assertSame("a b c", \Charcoal\Base\Strings\StringHelper::cleanSpaces("a   b\tc"));
     }
 
     public function testCleanSpaces_emptyAndOnlyWhitespace(): void
     {
-        $this->assertSame("", \Charcoal\Base\Support\Helpers\StringHelper::cleanSpaces(""));
-        $this->assertSame("", \Charcoal\Base\Support\Helpers\StringHelper::cleanSpaces(" \t\n "));
+        $this->assertSame("", \Charcoal\Base\Strings\StringHelper::cleanSpaces(""));
+        $this->assertSame("", \Charcoal\Base\Strings\StringHelper::cleanSpaces(" \t\n "));
     }
 
     public function testGetTrimmedOrNull_returnsTrimmedWhenNonEmpty(): void
     {
-        $this->assertSame("hello", \Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull("  hello  "));
-        $this->assertSame("a b", \Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull(" a b "));
+        $this->assertSame("hello", \Charcoal\Base\Strings\StringHelper::getTrimmedOrNull("  hello  "));
+        $this->assertSame("a b", \Charcoal\Base\Strings\StringHelper::getTrimmedOrNull(" a b "));
     }
 
     public function testGetTrimmedOrNull_returnsNullForWhitespaceOnlyAscii(): void
     {
-        $this->assertNull(\Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull("     "));
-        $this->assertNull(\Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull("\t\n\r"));
+        $this->assertNull(\Charcoal\Base\Strings\StringHelper::getTrimmedOrNull("     "));
+        $this->assertNull(\Charcoal\Base\Strings\StringHelper::getTrimmedOrNull("\t\n\r"));
     }
 
     public function testGetTrimmedOrNull_nonBreakingSpaceIsNotTrimmed(): void
     {
         $nbsp = "\xC2\xA0";
-        $this->assertSame($nbsp, \Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull($nbsp));
+        $this->assertSame($nbsp, \Charcoal\Base\Strings\StringHelper::getTrimmedOrNull($nbsp));
     }
 
     public static function nonStringValuesProvider(): array
@@ -63,6 +63,6 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
     #[dataProvider("nonStringValuesProvider")]
     public function testGetTrimmedOrNull_returnsNullForNonStrings($value): void
     {
-        $this->assertNull(\Charcoal\Base\Support\Helpers\StringHelper::getTrimmedOrNull($value));
+        $this->assertNull(\Charcoal\Base\Strings\StringHelper::getTrimmedOrNull($value));
     }
 }

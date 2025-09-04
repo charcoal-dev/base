@@ -8,14 +8,11 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Support;
 
-use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Enums\ExceptionAction;
-use Charcoal\Base\Enums\FetchOrigin;
-use Charcoal\Base\Enums\PrimitiveType;
-use Charcoal\Base\Enums\StorageType;
-use Charcoal\Base\Enums\ValidationState;
-use Charcoal\Base\Support\Helpers\EnumHelper;
-use Charcoal\Base\Vectors\StringVector;
+use Charcoal\Base\Enums\EnumHelper;
+use Charcoal\Contracts\Charsets\Charset;
+use Charcoal\Contracts\Dataset\ValidationState;
+use Charcoal\Contracts\Errors\ExceptionAction;
+use Charcoal\Contracts\Types\PrimitiveType;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,9 +23,7 @@ final class EnumHelperTest extends TestCase
     private array $enums = [
         Charset::class,
         ExceptionAction::class,
-        FetchOrigin::class,
         PrimitiveType::class,
-        StorageType::class,
         ValidationState::class
     ];
 
@@ -108,19 +103,6 @@ final class EnumHelperTest extends TestCase
 
         // Invalid should be skipped, valid should remain (unique)
         $this->assertSame([$valid], $validated);
-    }
-
-    /**
-     * @noinspection PhpUnhandledExceptionInspection
-     */
-    public function testValidateEnumCasesThrowsOnInvalidWhenThrow(): void
-    {
-        $enumClass = $this->findStringBackedEnumOrSkip();
-        $invalid = 'invalid-' . bin2hex(random_bytes(4));
-        $vector = new StringVector(...[$invalid]);
-
-        $this->expectException(\OutOfBoundsException::class);
-        EnumHelper::validatedEnumCasesFromVector($enumClass, $vector, ExceptionAction::Throw);
     }
 
     private function findStringBackedEnumOrSkip(): string

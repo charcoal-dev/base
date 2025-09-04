@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Tests\Support;
 
-use Charcoal\Base\Support\Helpers\ObjectHelper;
+use Charcoal\Base\Objects\ObjectHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
