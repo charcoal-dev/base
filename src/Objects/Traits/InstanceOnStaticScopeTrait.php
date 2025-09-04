@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
 
-use Charcoal\Base\Support\Helpers\ObjectHelper;
+use Charcoal\Base\Objects\ObjectHelper;
 
 /**
  * This trait enforces a singleton-like pattern at the class level. It binds exactly one instance to the
@@ -55,6 +55,19 @@ trait InstanceOnStaticScopeTrait
         if (!static::$instance) {
             throw new \DomainException(ObjectHelper::baseClassName(static::class) .
                 " instance is not initialized on static scope");
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * Retrieves the existing instance of the class or,
+     * initializes a new one if it does not already exist.
+     */
+    protected function getOrCreateInstance(): static
+    {
+        if (!static::$instance) {
+            static::initialize();
         }
 
         return static::$instance;
