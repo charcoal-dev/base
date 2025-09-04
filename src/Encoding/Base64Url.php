@@ -12,9 +12,9 @@ use Charcoal\Contracts\Buffers\ReadableBufferInterface;
 use Charcoal\Contracts\Encoding\EncodingSchemeStaticInterface;
 
 /**
- * A helper class that provides utility methods for working with encoding.
+ * A helper class that provides utility methods for working with base64url.
  */
-final readonly class Base64 implements EncodingSchemeStaticInterface
+final readonly class Base64Url implements EncodingSchemeStaticInterface
 {
     /**
      * @param string $str
@@ -22,7 +22,7 @@ final readonly class Base64 implements EncodingSchemeStaticInterface
      */
     public static function isEncoded(string $str): bool
     {
-        return $str && preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $str) === 1 && strlen($str) % 4 === 0;
+        return $str && preg_match('/^[A-Za-z0-9\-_]+={0,2}$/', $str) && in_array(strlen($str) % 4, [0, 2, 3]);
     }
 
     /**
@@ -31,11 +31,8 @@ final readonly class Base64 implements EncodingSchemeStaticInterface
      */
     public static function encode(ReadableBufferInterface|string $raw): string
     {
-        if ($raw instanceof ReadableBufferInterface) {
-            $raw = $raw->bytes();
-        }
-
-        return base64_encode($raw);
+        $b64 = Base64::encode($raw);
+        return strtr($b64, "+/", "-_");
     }
 
     /**
@@ -46,7 +43,8 @@ final readonly class Base64 implements EncodingSchemeStaticInterface
     {
         return match (true) {
             !$encoded, !self::isEncoded($encoded) => false,
-            default => base64_decode($encoded, true),
+            default => base64_decode(strtr($encoded, "-_", "+/") .
+                str_repeat("=", (4 - strlen($encoded) % 4) % 4), true),
         } ?: throw new \InvalidArgumentException("Invalid base64 encoded string");
     }
 }
