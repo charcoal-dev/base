@@ -1,15 +1,19 @@
 <?php
-declare(strict_types=1);
-
 /**
  * Part of the "charcoal-dev/base" package.
  * @link https://github.com/charcoal-dev/base
  */
 
-namespace Charcoal\Base\Tests\Fixtures\Registry;
+declare(strict_types=1);
 
-use Charcoal\Base\Concerns\StaticObjectsRegistry;
+namespace Charcoal\Base\Tests\Fixtures;
 
+use Charcoal\Base\Registry\Traits\StaticObjectsRegistry;
+
+/**
+ * A fixture class for managing a static registry of objects. Provides utility methods
+ * for working with the registry, including storing, retrieving, checking, and clearing objects.
+ */
 class StaticObjectsRegistryFixture
 {
     use StaticObjectsRegistry;

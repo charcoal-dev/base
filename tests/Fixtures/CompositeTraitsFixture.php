@@ -1,16 +1,16 @@
 <?php
-declare(strict_types=1);
-
 /**
  * Part of the "charcoal-dev/base" package.
  * @link https://github.com/charcoal-dev/base
  */
 
+declare(strict_types=1);
+
 namespace Charcoal\Base\Tests\Fixtures;
 
-use Charcoal\Base\Traits\NoDumpTrait;
-use Charcoal\Base\Traits\NotCloneableTrait;
-use Charcoal\Base\Traits\NotSerializableTrait;
+use Charcoal\Base\Objects\Traits\NoDumpTrait;
+use Charcoal\Base\Objects\Traits\NotCloneableTrait;
+use Charcoal\Base\Objects\Traits\NotSerializableTrait;
 
 class CompositeTraitsFixture
 {

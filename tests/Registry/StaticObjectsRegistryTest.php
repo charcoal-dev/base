@@ -1,14 +1,14 @@
 <?php
-declare(strict_types=1);
-
 /**
  * Part of the "charcoal-dev/base" package.
  * @link https://github.com/charcoal-dev/base
  */
 
+declare(strict_types=1);
+
 namespace Charcoal\Base\Tests\Registry;
 
-use Charcoal\Base\Tests\Fixtures\Registry\StaticObjectsRegistryFixture;
+use Charcoal\Base\Tests\Fixtures\StaticObjectsRegistryFixture;
 use PHPUnit\Framework\TestCase;
 
 /**
