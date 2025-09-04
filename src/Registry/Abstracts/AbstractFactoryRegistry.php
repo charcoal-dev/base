@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Abstracts;
+namespace Charcoal\Base\Registry\Abstracts;
 
-use Charcoal\Base\Concerns\RequiresNormalizedRegistryKeys;
+use Charcoal\Base\Registry\Concerns\RequiresNormalizedRegistryKeys;
 
 /**
  * Abstract base class for managing and creating instances of various objects.

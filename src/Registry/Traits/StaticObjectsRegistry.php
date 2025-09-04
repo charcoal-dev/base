@@ -6,15 +6,17 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Concerns;
+namespace Charcoal\Base\Registry\Traits;
 
 /**
  * This trait provides a mechanism for storing and accessing objects
  * in a centralized static registry. It supports adding, retrieving,
  * checking existence, removing, and normalizing instance keys in the registry.
+ * @template T of object
  */
 trait StaticObjectsRegistry
 {
+    /** @var array<string,T> */
     private static array $instances = [];
 
     final protected static function registrySetInstance(string $key, object $instance): void

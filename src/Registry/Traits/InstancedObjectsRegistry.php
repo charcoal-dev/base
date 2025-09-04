@@ -6,7 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Concerns;
+namespace Charcoal\Base\Registry\Traits;
+
+use Charcoal\Base\Registry\Concerns\RequiresNormalizedRegistryKeys;
 
 /**
  * This trait allows storing, retrieving, checking for existence, and removing
