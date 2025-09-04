@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Charcoal\Base\Encoding;
 
 use Charcoal\Contracts\Buffers\ReadableBufferInterface;
-use Charcoal\Contracts\Encoding\EncodingSchemeInterface;
+use Charcoal\Contracts\Encoding\EncodingSchemeStaticInterface;
 
 /**
  * A helper class that provides utility methods for working with base16.
  */
-final readonly class Base16 implements EncodingSchemeInterface
+final class Base16 implements EncodingSchemeStaticInterface
 {
     /**
      * @param string $str
