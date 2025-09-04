@@ -6,7 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
+
+use Charcoal\Base\Serialization\Traits\BlockLegacySerializationTrait;
 
 /**
  * A trait to disable all serialization and deserialization methods for classes that use it.

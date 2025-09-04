@@ -6,7 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Helpers;
+namespace Charcoal\Base\Objects;
+
+use Charcoal\Base\Arrays\DtoHelper;
 
 /**
  * A helper class that provides utility methods for working with objects and class paths.

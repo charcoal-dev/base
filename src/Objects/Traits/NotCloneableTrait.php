@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
 
 /**
  * Classes using this trait will throw a BadMethodCallException if an attempt is made

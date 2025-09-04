@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Traits;
+namespace Charcoal\Base\Objects\Traits;
 
 /**
  * Provides functionality to prevent debugging output or dumping of class properties.
