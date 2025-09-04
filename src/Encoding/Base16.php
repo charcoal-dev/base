@@ -14,7 +14,7 @@ use Charcoal\Contracts\Encoding\EncodingSchemeStaticInterface;
 /**
  * A helper class that provides utility methods for working with base16.
  */
-final class Base16 implements EncodingSchemeStaticInterface
+final readonly class Base16 implements EncodingSchemeStaticInterface
 {
     /**
      * @param string $str
