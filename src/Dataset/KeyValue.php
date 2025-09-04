@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Abstracts\Dataset;
+namespace Charcoal\Base\Dataset;
 
 /**
  * This class is designed to store a key of type string and an associated value

@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Abstracts\Dataset;
+namespace Charcoal\Base\Dataset;
 
-use Charcoal\Base\Enums\ValidationState;
+use Charcoal\Contracts\Dataset\ValidationState;
 
 /**
  * Represents a key-value pair with an associated trust state.

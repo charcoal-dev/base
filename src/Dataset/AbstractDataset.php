@@ -6,13 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Abstracts;
+namespace Charcoal\Base\Dataset;
 
-use Charcoal\Base\Abstracts\Dataset\BatchEnvelope;
-use Charcoal\Base\Abstracts\Dataset\KeyValue;
-use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Enums\ExceptionAction;
 use Charcoal\Base\Exceptions\WrappedException;
+use Charcoal\Contracts\Charsets\Charset;
+use Charcoal\Contracts\Errors\ExceptionAction;
 
 /**
  * Represents an abstract dataset encapsulating a collection of key-value pairs

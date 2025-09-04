@@ -6,13 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Abstracts;
+namespace Charcoal\Base\Dataset;
 
-use Charcoal\Base\Abstracts\Dataset\BatchEnvelope;
-use Charcoal\Base\Abstracts\Dataset\KeyValueTrust;
-use Charcoal\Base\Enums\Charset;
-use Charcoal\Base\Enums\ValidationState;
 use Charcoal\Base\Exceptions\WrappedException;
+use Charcoal\Contracts\Charsets\Charset;
+use Charcoal\Contracts\Dataset\ValidationState;
 
 /**
  * Abstract class for managing datasets with validation and normalization capabilities.
@@ -33,9 +31,9 @@ abstract class AbstractDatasetValidated extends AbstractDataset
      */
     public function __construct(
         public readonly Charset $charset,
-        public ValidationState  $accessKeyTrust = ValidationState::RAW,
-        public ValidationState  $setterKeyTrust = ValidationState::RAW,
-        public ValidationState  $valueTrust = ValidationState::RAW,
+        public ValidationState  $accessKeyTrust = ValidationState::Raw,
+        public ValidationState  $setterKeyTrust = ValidationState::Raw,
+        public ValidationState  $valueTrust = ValidationState::Raw,
         ?BatchEnvelope          $seed = null
     )
     {
@@ -52,7 +50,7 @@ abstract class AbstractDatasetValidated extends AbstractDataset
      */
     final protected function policyValidateEntryKey(string $key): string
     {
-        return $this->setterKeyTrust->meets(ValidationState::VALIDATED) ?
+        return $this->setterKeyTrust->meets(ValidationState::Validated) ?
             $key : $this->validateEntryKey($key);
     }
 
@@ -62,7 +60,7 @@ abstract class AbstractDatasetValidated extends AbstractDataset
      */
     final protected function policyValidateAccessKey(string $key): string
     {
-        return $this->accessKeyTrust->meets(ValidationState::VALIDATED) ?
+        return $this->accessKeyTrust->meets(ValidationState::Validated) ?
             $key : $this->validateEntryKey($key);
     }
 
@@ -73,7 +71,7 @@ abstract class AbstractDatasetValidated extends AbstractDataset
      */
     final protected function policyValidateEntryValue(mixed $value, string $validatedKey): mixed
     {
-        return $this->valueTrust->meets(ValidationState::VALIDATED) ?
+        return $this->valueTrust->meets(ValidationState::Validated) ?
             $value : $this->validateEntryValue($value, $validatedKey);
     }
 
@@ -88,7 +86,7 @@ abstract class AbstractDatasetValidated extends AbstractDataset
         $key = $this->policyValidateEntryKey($key);
         $accessKey = $this->normalizeAccessKey($key);
         $value = $this->policyValidateEntryValue($value, $key);
-        $this->dataset[$accessKey] = new KeyValueTrust($key, $value, ValidationState::VALIDATED);
+        $this->dataset[$accessKey] = new KeyValueTrust($key, $value, ValidationState::Validated);
         return $this;
     }
 
