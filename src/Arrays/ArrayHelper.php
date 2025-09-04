@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Base\Support\Helpers;
+namespace Charcoal\Base\Arrays;
 
 /**
  * A helper class that provides utility methods for working with arrays.
