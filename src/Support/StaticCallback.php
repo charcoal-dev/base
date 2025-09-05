@@ -8,20 +8,21 @@ declare(strict_types=1);
 
 namespace Charcoal\Base\Support;
 
-use Charcoal\Contracts\Serialization\SerializableCallback;
+use Charcoal\Contracts\Serialization\SerializableStaticCallback;
 
 /**
  * This class allows storing a callable (static method or function) along
  * with optional arguments, which can be invoked at a later time. The object
  * can also be serialized and deserialized, maintaining its functionality.
  */
-readonly class StaticCallback implements SerializableCallback
+readonly class StaticCallback implements SerializableStaticCallback
 {
-    private string|array $callback;
+    /** @var array<class-string,string> */
+    private array $callback;
     private ?array $args;
 
     /**
-     * @param string|array $callback
+     * @param string|array<class-string,string> $callback
      * @param bool|string|int|null ...$args
      * @return self
      */
@@ -38,18 +39,19 @@ readonly class StaticCallback implements SerializableCallback
         $callback = is_string($callback) && str_contains($callback, "::") ?
             explode("::", $callback) : $callback;
 
-        $this->callback = match (true) {
-            is_string($callback),
-            (is_array($callback) && count($callback) === 2 &&
-                is_string($callback[0]) && is_string($callback[1] ?? null)) => $callback,
-            default => throw new \InvalidArgumentException("Invalid callback"),
-        };
-
-        if (!is_callable($this->callback)) {
-            throw new \InvalidArgumentException("Callback is not callable: " .
-                implode("::", $this->callback));
+        if (!is_array($callback)
+            || count($callback) !== 2
+            || !is_string($callback[0])
+            || !is_string($callback[1] ?? null)
+        ) {
+            throw new \InvalidArgumentException("Invalid callback");
         }
 
+        if (!is_callable($callback)) {
+            throw new \InvalidArgumentException("Callback is not callable: " . implode("::", $callback));
+        }
+
+        $this->callback = $callback;
         $this->args = $args ?: null;
     }
 
@@ -59,7 +61,7 @@ readonly class StaticCallback implements SerializableCallback
     public function invoke(mixed ...$args): mixed
     {
         if (!is_callable($this->callback)) {
-            throw new \RuntimeException(self::class . ': method ' . $this->callback[1] . ' of class ' .
+            throw new \RuntimeException(self::class . ': method ' . ($this->callback[1] ?? "") . ' of class ' .
                 $this->callback[0] . ' is no longer callable');
         }
 
