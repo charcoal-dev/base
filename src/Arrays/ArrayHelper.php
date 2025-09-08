@@ -48,6 +48,25 @@ abstract readonly class ArrayHelper
     }
 
     /**
+     * @param array $a
+     * @param array $b
+     * @return array
+     */
+    public static function mergeAssocDeep(array $a, array $b): array
+    {
+        foreach ($b as $key => $value) {
+            if (isset($a[$key]) && is_array($a[$key]) && is_array($value)
+                && array_is_list($a[$key]) === false && array_is_list($value) === false) {
+                $a[$key] = self::mergeAssocDeep($a[$key], $value);
+            } else {
+                $a[$key] = $value;
+            }
+        }
+
+        return $a;
+    }
+
+    /**
      * @param array $array
      * @param int $limit
      * @return int
