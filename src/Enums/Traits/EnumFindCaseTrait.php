@@ -9,14 +9,17 @@ declare(strict_types=1);
 namespace Charcoal\Base\Enums\Traits;
 
 /**
- * @mixin \UnitEnum
+ * @mixin \UnitEnum|\BackedEnum
  */
 trait EnumFindCaseTrait
 {
+    use EnumMappingTrait;
+
     public static function find(string $case): ?static
     {
         foreach (static::cases() as $c) {
-            if ($c->name === $case) {
+            $c2 = static::isBackedEnum() ? $c->value : $c->name;
+            if ($c2 === $case) {
                 return $c;
             }
         }
