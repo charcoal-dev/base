@@ -12,6 +12,7 @@ namespace Charcoal\Base\Enums\Traits;
  * This trait includes methods for determining if the implementing class
  * is a backed enum, retrieving enum case mappings, and extracting keys
  * or values from enum definitions.
+ * @mixin \UnitEnum
  */
 trait EnumMappingTrait
 {
@@ -29,7 +30,6 @@ trait EnumMappingTrait
     protected static function getCaseMap(): array
     {
         $options = [];
-        /** @var \UnitEnum $case */
         foreach (static::cases() as $case) {
             $options[$case->name] = $case->value ?? null;
         }
