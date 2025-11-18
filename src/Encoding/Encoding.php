@@ -18,6 +18,7 @@ use Charcoal\Contracts\Encoding\EncodingSchemeInterface;
 enum Encoding: int implements EncodingSchemeInterface
 {
     case Base16 = 16;
+    case Base32 = 32;
     case Base64 = 64;
     case Base64Url = 641;
 
@@ -28,6 +29,7 @@ enum Encoding: int implements EncodingSchemeInterface
     {
         return match ($this) {
             self::Base16 => Base16::isEncoded($str),
+            self::Base32 => Base32::isEncoded($str),
             self::Base64 => Base64::isEncoded($str),
             self::Base64Url => Base64Url::isEncoded($str),
         };
@@ -40,6 +42,7 @@ enum Encoding: int implements EncodingSchemeInterface
     {
         return match ($this) {
             self::Base16 => Base16::encode($raw),
+            self::Base32 => Base32::encode($raw),
             self::Base64 => Base64::encode($raw),
             self::Base64Url => Base64Url::encode($raw),
         };
@@ -52,6 +55,7 @@ enum Encoding: int implements EncodingSchemeInterface
     {
         return match ($this) {
             self::Base16 => Base16::decode($encoded),
+            self::Base32 => Base32::decode($encoded),
             self::Base64 => Base64::decode($encoded),
             self::Base64Url => Base64Url::decode($encoded),
         };
