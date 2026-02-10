@@ -1,5 +1,6 @@
 # Charcoal Base
 
+[![Tests](https://github.com/charcoal-dev/base/actions/workflows/tests.yml/badge.svg)](https://github.com/charcoal-dev/base/actions/workflows/tests.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Core traits, abstract classes, enums, and lightweight event tools for Charcoal and related PHP libraries.
