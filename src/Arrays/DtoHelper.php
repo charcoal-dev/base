@@ -72,11 +72,11 @@ abstract readonly class DtoHelper
         }
 
         if (is_object($context)) {
-            if ($observer?->contains($context)) {
+            if ($observer?->offsetExists($context)) {
                 return is_callable($onRecursion) ? $onRecursion($context) : $onRecursion;
             }
 
-            $observer?->attach($context);
+            $observer?->offsetSet($context);
 
             if ($normalizeCommonShapes) {
                 if ($context instanceof \UnitEnum) {
